@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Recommendation Quiz</title>
+ <style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=EB+Garamond:wght@400;600&display=swap');
+
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+  body {
+    font-family: 'Lato', Arial, sans-serif;
+    background-color: #f2eeea;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    text-align: center;
+    background-color: #f2eeea;
+    border-radius: 4px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+
+  }
+
+  .question {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+button {
+  background-color: #f2eeea;
+  color: #3c4b3c;
+  border: 1.5px solid transparent;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto;
+  border-radius: 30px;
+  transition: all 0.1s;
+}
+
+button:hover {
+  background-color: #3c4b3c;
+  color: #f2eeea;
+  border-color: #f2eeea;
+}
+
+h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #3c4b3c;
+  transition: color 0.3s ease;
+}
+
+h2, h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+  margin-bottom: 0;
+  text-align: center;
+  color: #3c4b3c;
+  font-family: Rubik, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  transition: color .3s ease;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1rem;
+  justify-content: center;
+}
+   
+h3 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+
+  p {
+    color: #333333;
+    text-align: center;
+    transition: color 0.3s ease;
+
+  }
+
+  .answer-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+.answer-container button:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+  .results {
+    text-align: center;
+  }
+
+  .outcome-image {
+    width: 80px;
+    height: auto;
+    text-align: center;
+  }
+
+.product-description {
+  font-size: 14px;
+  color: #333333;
+  margin-top: 5px;
+  margin-bottom: 5px;
+text-align: left;
+padding-left: 10px;
+padding-right: 10px;
+
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+.shop-now-btn {
+  padding: 15px;
+  font-size: 14px;
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0;
+  background-color: transparent;
+  color: #3c4b3c;
+  border: none;
+  transition: none;
+
+}
+
+.shop-now-btn:hover {
+    background-color: unset;
+  color: unset;
+  }
+
+
+  .outcome-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .outcome-description {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .logo {
+    display: block;
+    width: 30px;
+    height: auto;
+    margin-top: 5px;
+    text-align: center;
+justify-content: center;
+  }
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+margin-top: 30px;
+    transition: transform 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+
+}
+
+  
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+  align-items: flex-start;
+}
+
+   .product-name-container, .product-description-container, .price-and-button-container {
+  display: flex;
+  flex-direction: column;
+     justify-content: center;
+  align-items: flex-start;
+}
+
+.product-name-container {
+  justify-content: flex-start;
+align-items: flex-start;
+    flex-direction: column;
+
+}
+
+
+.product-description-container {
+justify-content: flex-end;
+  margin-right: 10px;
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+
+}
+
+
+
+.price-and-button-container {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.product-description-container,
+.price-and-button-container {
+  justify-content: flex-end;
+}
+
+
+.product-item {
+  flex-basis: calc(33.33% - 20px);
+  margin: 0 10px 20px;
+}
+
+.product-item a {
+    text-decoration: none;
+  }
+
+  
+  .product-item:hover {
+    
+  }
+
+.product-image {
+  width: 100%;
+  height: auto;
+border-radius: 20px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s;
+}
+
+
+.product-image:hover {
+  box-shadow: 0 0 12px rgba(0,0,0,.15);
+}
+
+.product-image:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+.title-container.move-up {
+  transform: translateY(-20px);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 10px;
+text-align: left;
+padding-left: 10px;
+padding-right: 10px;
+margin-bottom: 5px;
+
+}
+
+
+
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in;
+}
+
+.fade-out {
+  animation: fadeOut 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+
+
+/* For desktop and tablet screens */
+@media (min-width: 768px) {
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+  align-items: flex-start;
+}
+  .product-item {
+    width: calc(33.33% - 20px);
+  }
+}
+  
+@media (max-width: 767px) {
+
+h1 {
+font-size: 28px;
+}
+
+.quiz-container {
+padding: 20px;
+}
+
+h2, h3 {
+font-size: 18px;
+}
+.product-item {
+    flex-basis: calc(50% - 20px);
+  }
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+  align-items: flex-start;
+}
+  
+}
+
+   @media (max-width: 600px) {
+.product-item {
+    flex-basis: calc(100% - 20px);
+  }
+     justify-content: center;
+     .product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+            justify-content: center;
+
+}
+}
+
+ 
+
+</style>
+</head>
+<body>
+  <div class="quiz-container">
+   <div class="header">
+  <div class="title-container">
+    <h2>GIFT SELECTOR</h2>
+    <img class="logo" src="https://rbbbhl.stripocdn.email/content/guids/CABINET_c957773e30337c393980dcc1d675a5e5/images/__gift_present_box_birthday256_QVh.png" alt="Garrett Wade Logo">
+  </div>
+</div>
+<h1 class="gift-text">Ready to Find the Perfect Gift?</h1>
+    <div class="quiz-cover">
+      <p>Take our <strong><em>super quick</em></strong> quiz and discover the ideal gift for your loved ones! Uncover hand-picked recommendations from our team.
+</p>
+      <button class="start-btn">Start the Quiz</button>
+    </div>
+    <div class="question" data-question="1" style="display:none;">
+      <h2>Question 1: Who are you shopping for?</h2>
+      <div class="answer-container">
+        <button class="answer" data-outcomes="The Whippersnapper">Kid</button>
+        <button class="answer" data-outcomes=" ">Adult</button>
+        <button class="answer" data-outcomes=" ">A kid at heart</button>
+      </div>
+    </div>
+    <div class="question" data-question="2" style="display:none;">
+      <h2>Question 2: How do they spend their time?</h2>
+      <div class="answer-container">
+        <button class="answer" data-outcomes="The Kitchen Maestro">Cooking or baking delicious meals</button>
+        <button class="answer" data-outcomes="The Green-Thumbed Gardener">Spending time in the garden, nurturing plants</button>
+        <button class="answer" data-outcomes="The Outdoor Adventurer">Going on outdoor adventures, hiking or camping</button>
+        <button class="answer" data-outcomes="The Collector">Search for vintage items or antiques</button>
+<button class="answer" data-outcomes="The Woodworking Hobbyist">Tinkering in the workshop, creating wooden masterpieces</button>
+        <button class="answer" data-outcomes="The Classic Game Lover">Playing board games or solving puzzles</button>
+        <button class="answer" data-outcomes="The DIY Enthusiast">Fixing something or planning their next home improvement project</button>
+        <button class="answer" data-outcomes="The Organization Expert">Tidying up or organizing their tools</button>
+ <button class="answer" data-outcomes="The Crafting Expert">Working with their hands on their latest craft</button>
+<button class="answer" data-outcomes="The Homebody">Making their space cozy & comfortable</button>
+      </div>
+    </div>
+
+<div class="opt-in-form" style="display:none;">
+<h3>Want to be the first to hear about <strong><em>limited quantity products</em></strong> , <strong><em>new arrivals</em></strong> , and our <strong><em>best promotions</em></strong> ?</h3>
+<p>Join our email list and receive exclusive discounts and gift ideas for your loved ones.</p>
+<button class="continue-btn">Continue</button>
+</div>
+<div class="results" style="display:none;">
+<h2>These are sure to be crowd pleasures:</h2>
+<p class="outcome"></p>
+        <img class="outcome-image" src="" alt="">
+        <h3 class="outcome-title"></h3>
+        <p class="outcome-description"></p>
+</div>
+
+  </div>
+  <script>
+    const startBtn = document.querySelector(".start-btn");
+const questions = document.querySelectorAll(".question");
+const optInForm = document.querySelector(".opt-in-form");
+const continueBtn = document.querySelector(".continue-btn");
+const results = document.querySelector(".results");
+const outcomeEl = document.querySelector(".outcome");
+let outcomes = {};
+
+function nextQuestion(currentQuestion) {
+  currentQuestion.classList.add("fade-out");
+
+  setTimeout(() => {
+    currentQuestion.style.display = "none";
+    currentQuestion.classList.remove("fade-out");
+
+const nextQuestion = outcomes["The Whippersnapper"] ? optInForm : currentQuestion.nextElementSibling || optInForm;
+nextQuestion.style.display = "block";
+nextQuestion.classList.add("fade-in");
+setTimeout(() => {
+  nextQuestion.classList.remove("fade-in");
+}, 500);
+
+
+
+
+  }, 500);
+}
+
+document.querySelectorAll(".answer").forEach((answer) => {
+  answer.addEventListener("click", (e) => {
+    const outcome = e.target.dataset.outcomes;
+    if (outcome === "The Whippersnapper") {
+      outcomes[outcome] = 1;
+      nextQuestion(e.target.closest(".question"));
+    } else {
+      if (!outcomes[outcome]) {
+        outcomes[outcome] = 0;
+      }
+      outcomes[outcome]++;
+      nextQuestion(e.target.closest(".question"));
+    }
+  });
+});
+
+
+
+function displayProductRecommendations(products) {
+  const productList = document.createElement("div");
+  productList.classList.add("product-list");
+
+  products.forEach(product => {
+    const productItem = document.createElement("div");
+    productItem.classList.add("product-item");
+
+    const productLink = document.createElement("a");
+    productLink.href = product.url;
+    productLink.target = "_blank";
+    productLink.rel = "noopener noreferrer";
+
+    const productImage = document.createElement("img");
+    productImage.src = product.image;
+    productImage.alt = product.name;
+    productImage.classList.add("product-image");
+
+    const productName = document.createElement("h4");
+    productName.textContent = product.name;
+    productName.classList.add("product-name");
+
+    const productDescription = document.createElement("p");
+    productDescription.textContent = product.description;
+    productDescription.classList.add("product-description");
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = product.price;
+    productPrice.classList.add("product-price");
+    productPrice.style.paddingLeft = "10px";
+    productPrice.style.paddingRight = "10px";
+
+    const shopNowBtn = document.createElement("button");
+    shopNowBtn.textContent = "Gift Now ➺";
+    shopNowBtn.classList.add("shop-now-btn");
+    shopNowBtn.style.paddingLeft = "10px";
+    shopNowBtn.style.paddingRight = "10px";
+
+    productLink.appendChild(productImage);
+
+    const productNameContainer = document.createElement("div");
+    productNameContainer.classList.add("product-name-container");
+    productNameContainer.appendChild(productName);
+
+    const productDescriptionContainer = document.createElement("div");
+    productDescriptionContainer.classList.add("product-description-container");
+    productDescriptionContainer.appendChild(productDescription);
+
+    const priceAndButtonContainer = document.createElement("div");
+    priceAndButtonContainer.classList.add("price-and-button-container");
+
+    productLink.appendChild(productNameContainer);
+    productLink.appendChild(productDescriptionContainer);
+
+    priceAndButtonContainer.style.display = "flex";
+    priceAndButtonContainer.style.justifyContent = "space-between";
+    priceAndButtonContainer.style.alignItems = "center";
+    priceAndButtonContainer.appendChild(productPrice);
+    priceAndButtonContainer.appendChild(shopNowBtn);
+    productLink.appendChild(priceAndButtonContainer);
+    productItem.appendChild(productLink);
+    productList.appendChild(productItem);
+  });
+
+  results.appendChild(productList);
+}
+
+
+
+
+
+function showResults() {
+  const maxOutcome = Object.keys(outcomes).reduce((a, b) => outcomes[a] > outcomes[b] ? a : b);
+  
+  const outcomeData = {
+
+"The Green-Thumbed Gardener": {
+      title: "The Green-Thumbed Gardener",
+      image: "https://rbbbhl.stripocdn.email/content/guids/CABINET_a03dacafb9c93e7f720108328fe4ffee6e253858fe75c52fe69ab53c26bd6d84/images/set_of_garden_tools256.png",
+      description: "If your mom loves spending time in her garden, get her the perfect gift with our small bypass pruners or forged carbon steel hand pruners. They are great for trimming bushes, flowers, and veggies, and will be her go-to tool for years to come.",
+      products: [
+        {
+          name: "Small Bypass Pruners",
+    description: "Perfect for small branches and stems.",
+    price: "$24.99",
+    url: "%%GLOBAL_ShopPathSSL%%/product/small-bypass-pruners",
+    image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/1280x1280/products/25550/27636/11g1215_11__24337__85915.1623875433.jpg?c=1"
+  },
+        {
+          name: "Forged Carbon Steel Hand Pruners",
+description: "Perfect for small branches and stems.",
+price: "$24.99",
+          url: "%%GLOBAL_ShopPathSSL%%/product/forged-carbon-steel-hand-pruners",
+          image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/640w/products/30005/35600/67C0204-ForgedPruners__42290.1625779603.jpg?c=1"
+        },
+        {
+          name: "2 Gallon Watering Can",
+description: "Perfect for small branches and stems.",
+price: "$24.99",
+          url: "%%GLOBAL_ShopPathSSL%%/product/2-gallon-watering-can",
+          image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/640w/products/30325/36553/16T0314_WateringCan_Main__22997.1644274776.jpg?c=1"
+        }
+
+
+      ]
+    },
+
+    "The Whippersnapper": {
+      title: "The Whippersnapper",
+      image: "https://rbbbhl.stripocdn.email/content/guids/CABINET_a03dacafb9c93e7f720108328fe4ffee6e253858fe75c52fe69ab53c26bd6d84/images/set_of_garden_tools256.png",
+      description: "If your mom loves spending time in her garden, get her the perfect gift with our small bypass pruners or forged carbon steel hand pruners. They are great for trimming bushes, flowers, and veggies, and will be her go-to tool for years to come.",
+      products: [
+        {
+          name: "Small Bypass Pruners",
+    description: "Perfect for small branches and stems.",
+    price: "$24.99",
+    url: "%%GLOBAL_ShopPathSSL%%/product/small-bypass-pruners",
+    image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/1280x1280/products/25550/27636/11g1215_11__24337__85915.1623875433.jpg?c=1"
+  },
+        {
+          name: "Forged Carbon Steel Hand Pruners",
+description: "Perfect for small branches and stems.",
+price: "$24.99",
+          url: "%%GLOBAL_ShopPathSSL%%/product/forged-carbon-steel-hand-pruners",
+          image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/640w/products/30005/35600/67C0204-ForgedPruners__42290.1625779603.jpg?c=1"
+        },
+        {
+          name: "2 Gallon Watering Can",
+description: "Perfect for small branches and stems.",
+price: "$24.99",
+          url: "%%GLOBAL_ShopPathSSL%%/product/2-gallon-watering-can",
+          image: "https://cdn11.bigcommerce.com/s-3c8l9ljcjn/images/stencil/640w/products/30325/36553/16T0314_WateringCan_Main__22997.1644274776.jpg?c=1"
+        }, 
+
+
+      ]
+    }
+  };
+  
+
+  document.querySelector(".outcome-image").src = outcomeData[maxOutcome].image;
+  document.querySelector(".outcome-title").textContent = outcomeData[maxOutcome].title;
+  document.querySelector(".outcome-description").textContent = outcomeData[maxOutcome].description;
+  
+  displayProductRecommendations(outcomeData[maxOutcome].products);
+  results.style.display = "block";
+
+}
+
+startBtn.addEventListener("click", () => {
+  startBtn.parentElement.style.display = "none";
+  document.querySelector(".gift-text").style.display = "none";
+  questions[0].style.display = "block";
+  document.querySelector(".title-container").classList.add("move-up");
+});
+
+
+questions.forEach((question) => {
+  const answers = question.querySelectorAll(".answer");
+  answers.forEach((answer) => {
+    answer.addEventListener("click", () => {
+      const outcome = answer.dataset.outcomes;
+      if (
+outcomes[outcome]) {
+outcomes[outcome]++;
+} else {
+outcomes[outcome] = 1;
+}
+nextQuestion(question);
+});
+});
+});
+
+continueBtn.addEventListener("click", () => {
+optInForm.style.display = "none";
+showResults();
+});
+ </script>
+</body>
+</html>
+
+
